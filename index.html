@@ -1,39 +1,90 @@
 <!DOCTYPE html>
 <html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofoliu Web</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Configurare Tailwind CSS -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        base: '#1e1e2e',
-                        text: '#cdd6f4',
-                        mauve: '#cba6f7',
-                        peach: '#fab387',
-                        surface: '#313244'
-                    },
-                    fontFamily: {
-                        mono: ['"Fira Code"', 'ui-monospace', 'monospace'],
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portofoliu Web</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            base: '#1e1e2e',
+                            text: '#cdd6f4',
+                            mauve: '#cba6f7',
+                            peach: '#fab387',
+                            surface: '#313244'
+                        },
+                        fontFamily: {
+                            mono: ['"Fira Code"', 'ui-monospace', 'monospace'],
+                            sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                        }
                     }
                 }
             }
-        }
-    </script>
-</head>
-<body class="bg-base text-text font-sans antialiased min-h-screen p-4 md:p-8">
-    <main class="max-w-4xl mx-auto mt-10">
-        <h1 class="font-mono text-3xl text-mauve font-bold border-b border-surface pb-2">
-            ~/$ portofoliu_mario
-        </h1>
-        <p class="mt-4 opacity-80">Așteptare scriere UI...</p>
-    </main>
-    <script src="app.js"></script>
-</body>
+        </script>
+    </head>
+
+    <body class="bg-base text-text font-sans antialiased min-h-screen p-4 md:p-8">
+        <main class="max-w-4xl mx-auto mt-10">
+            
+            <h1 class="font-mono text-3xl text-mauve font-bold border-b border-surface pb-2">
+                > despre_mine
+            </h1>
+
+            <section id="profil" class="mt-8 flex flex-col md:flex-row items-center md:items-start gap-6 border border-surface p-6 rounded-lg bg-[#242536] shadow-lg">
+
+                <div class="w-32 h-32 rounded-full overflow-hidden border-2 border-mauve shrink-0">
+                    <img src="https://via.placeholder.com/150" alt="Mario Samoilă" class="w-full h-full object-cover">
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h2 class="text-2xl font-bold text-text">Mario Samoilă</h2>
+                    <h3 class="text-peach font-mono text-lg mt-1">Computer Science and Engineering Student</h3>
+
+                    <p class="mt-3 text-sm opacity-90 leading-relaxed">
+                        Pasionat de ecosistemul Linux și mereu curios să aprofundez concepte sau limbaje de programare noi. 
+                        În prezent, îmi construiesc o fundație tehnică solidă prin proiecte academice și personale dezvoltate în C/C++ și Python, 
+                        fiind interesat de modul în care funcționează sistemele la nivel de bază.
+                    </p>
+
+                    <p class="mt-2 text-sm text-mauve opacity-80 leading-relaxed">
+                        // Dincolo de terminal, îmi ocup timpul liber citind literatură science fiction și aprofundând subiecte legate de istoria contemporană,
+                        natură sau explorare spațială. De asemenea, mă relaxez optimizând lanțuri de producție în jocuri de automatizare și urmărind serii animate cu un fir narativ complex.
+                    </p>
+
+                    <div class="mt-5 inline-flex items-center gap-2 bg-base border border-surface px-4 py-2 rounded font-mono text-xs text-text shadow-sm">
+                        Facultatea de Inginerie, Universitatea "Lucian Blaga" din Sibiu (2024-2028)
+                    </div>
+                </div>
+            </section>
+
+            <section id="portofoliu" class="mt-14 mb-20">
+                <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-surface pb-4 mb-6 gap-4">
+                    <h2 class="font-mono text-2xl text-mauve font-bold">
+                        > proiecte_github
+                    </h2>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="search-input" placeholder="Caută proiect..." 
+                            class="bg-base border border-surface text-text text-sm rounded px-3 py-2 focus:outline-none focus:border-mauve placeholder-opacity-50 font-mono w-full sm:w-auto">
+                        
+                        <select id="language-filter" 
+                            class="bg-base border border-surface text-text text-sm rounded px-3 py-2 focus:outline-none focus:border-mauve font-mono w-full sm:w-auto appearance-none">
+                            <option value="all">Toate limbajele</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                </div>
+            </section>
+        </main>
+        <script src="app.js"></script>
+    </body>
+
 </html>
