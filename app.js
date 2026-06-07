@@ -1,4 +1,6 @@
 let allProjects = [];
+let currentFilteredProjects = [];
+let displayedCount = 6;
 
 async function fetchProjects() {
     const container = document.getElementById('projects-container');
@@ -15,8 +17,10 @@ async function fetchProjects() {
         allProjects = data.filter(repo => repo.fork === false);
         allProjects.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
+        currentFilteredProjects = [...allProjects];
+
         populateLanguageFilter(allProjects);
-        renderProjects(allProjects);
+        renderProjects(currentFilteredProjects);
     } catch (error) {
 
         console.error("Eroare fetch:", error);
@@ -29,14 +33,18 @@ async function fetchProjects() {
 
 function renderProjects(projects) {
     const container = document.getElementById('projects-container');
+    const loadMoreContainer = document.getElementById('load-more-container');
     container.innerHTML = '';
 
     if (projects.length === 0) {
-        container.innerHTML = `<p class="text-text opacity-70 col-span-2 text-center">Nu s-au găsit proiecte.</p>`;
+        container.innerHTML = `<p class="text-text opacity-70 col-span-2 text-center py-10 font-mono">Nu s-au găsit proiecte conform filtrelor aplicate.</p>`;
+        if (loadMoreContainer) loadMoreContainer.classList.add('hidden');
         return;
     }
 
-    projects.forEach(repo => {
+    const projectsToShow = projects.slice(0, displayedCount);
+
+    projectsToShow.forEach(repo => {
         const description = repo.description || "Fără descriere disponibilă.";
         const language = repo.language || "N/A";
         const card = document.createElement('div');
@@ -55,10 +63,17 @@ function renderProjects(projects) {
             
             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" 
                class="mt-auto block bg-base hover:bg-mauve hover:text-base border border-surface hover:border-mauve text-center py-2 rounded text-sm font-mono transition-all">
-               open_repository
+               ./open_repository
             </a>`;
         container.appendChild(card);
     });
+
+    if(projects.length > displayedCount) {
+        loadMoreContainer.classList.remove('hidden');
+    }
+    else {
+        loadMoreContainer.classList.add('hidden');
+    }
 }
 
 function populateLanguageFilter(projects) {
@@ -82,15 +97,20 @@ function handleFilters() {
     const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
     const selectedLanguage = document.getElementById('language-filter')?.value || 'all';
     
-    const filtered = allProjects.filter(repo => {
+    currentFilteredProjects = allProjects.filter(repo => {
         const matchesSearch = repo.name.toLowerCase().includes(searchTerm) ||
                             (repo.description && repo.description.toLowerCase().includes(searchTerm));
         const matchesLanguage = selectedLanguage === 'all' || repo.language === selectedLanguage;
-        return matchesSearch & matchesLanguage;
+        return matchesSearch && matchesLanguage;
     });
-    renderProjects(filtered);
+    displayedCount = 6;
+    renderProjects(currentFilteredProjects);
 }
 
 document.getElementById('search-input')?.addEventListener('input', handleFilters);
 document.getElementById('language-filter')?.addEventListener('change', handleFilters);
 document.addEventListener('DOMContentLoaded', fetchProjects);
+document.getElementById('load-more-btn')?.addEventListener('click', () => {
+    displayedCount += 6;
+    renderProjects(currentFilteredProjects);
+});
