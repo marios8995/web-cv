@@ -18,3 +18,29 @@ Pentru a păstra datele în siguranță, interfața nu comunică direct cu GitHu
 - **Backend / Proxy:** Node.js 
 - **Date:** GitHub API
 - **Hosting:** Vercel
+
+## Instalare si Rulare Locală
+
+1. **Descarcă proiectul:**
+   ```bash
+   git clone [https://github.com/marios8995/web-cv.git](https://github.com/marios8995/web-cv.git)
+   cd web-cv
+   ```
+
+2. **Instalează Vercel CLI:**
+   ```bash
+   npm i -g vercel
+   ```
+
+3. **Configurează token-ul de acces:**
+   - Redenumește `.env.template` în `.env`
+   - Generează un Personal Access Token (PAT) din GitHub
+   - Pune token-ul în `.env` după `GITHUB_TOKEN=`
+
+4. **Pornește serverul local:**
+   ```bash
+   vercel dev
+   ```
+
+5. **Deschide browser-ul:**
+   Accesează `http://localhost:3000` pentru a vedea pagina
