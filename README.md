@@ -14,7 +14,7 @@ Pentru a păstra datele în siguranță, interfața nu comunică direct cu GitHu
 
 ## Tehnologii Folosite
 
-- **Frontend:** HTML5, JavaScript (Vanilla), Tailwind CSS
+- **Frontend:** HTML5, JavaScript (Vanilla), CSS
 - **Backend / Proxy:** Node.js 
 - **Date:** GitHub API
 - **Hosting:** Vercel
