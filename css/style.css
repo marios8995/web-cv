@@ -33,7 +33,7 @@ a {
 }
 
 .container {
-    max-width: 56rem; /* 896px */
+    max-width: 56rem;
     margin: 0 auto;
 }
 
